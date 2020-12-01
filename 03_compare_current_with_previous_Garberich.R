@@ -24,6 +24,11 @@ source("02_scrape_nominees.R")
 
 #Your code here#
 
+transition_data_previous <- readRDS("archived_data/staff_data_archived_2020_11_24t14_00.rds")
+transition_data_previous 
+
+transition_data_current <- readRDS("processed_data/staff_data_scraped.rds")
+transition_data_current
 
 
 
