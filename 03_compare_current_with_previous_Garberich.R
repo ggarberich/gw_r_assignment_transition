@@ -30,8 +30,8 @@ transition_staff_previous
 transition_staff_current <- readRDS("processed_data/staff_data_scraped.rds")
 transition_staff_current
 
-newnames <- anti_join(transition_data_current, transition_data_previous, by = "idstring")
-newnames
+newstaffnames <- anti_join(transition_staff_current, transition_staff_previous, by = "idstring")
+newstaffnames
 
 
 #### AGENCY TEAMS ##### --------------------------------------------------------
