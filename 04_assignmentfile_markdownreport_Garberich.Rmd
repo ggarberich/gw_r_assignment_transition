@@ -92,7 +92,7 @@ Below write code to show the new names added to the senior staff lists since the
   
 
 ```{r, echo=FALSE}
-
+newstaffnames
 
 
  
@@ -106,9 +106,8 @@ Add code to show the total number of people currently named to the WH senior sta
   
 
 ```{r, echo=FALSE}
-
-
-
+nrow (staffcount_current)
+nrow (staffcount_previous)
 
 
 ```
