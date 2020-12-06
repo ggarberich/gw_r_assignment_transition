@@ -37,7 +37,7 @@ Below write code to show the new names added to the agency review team lists sin
 ```{r, echo=FALSE}
 newnames
 
-
+newnames %>%  gt() %>% tab_header(   title = "New Names Added to Agency Review Team"  ) %>% cols_label (team_lead = "Team Lead", most_recent_employment = "Most Recent Employment", on_multiple_teams = "On Multiple Teams", source_of_funding = "Source of Funding" ) %>% cols_hide (columns = vars(team_lead,idstring, namestring))
  
 
 ```
@@ -50,7 +50,8 @@ Add data to show the total number of people appointed to each agency team, along
 
 ```{r, echo=FALSE}
 agencycount_compare %>%
-filter (change > 0)
+filter (change > 0) %>% gt() %>%
+tab_header(   title = "Total Number of People in Each Agency and Change in Administrations"  ) %>% cols_label (current_count = "Current Count", previous_count = "Previous Count", agency = "Agency", change = "Change" )
 
 ```
 
@@ -62,7 +63,8 @@ Show the top 10 **largest** agency review teams as of today:
 ```{r, echo=FALSE}
 agencycount_current %>%
 arrange (desc(current_count)) %>%
-filter (current_count > 22)
+filter (current_count > 22) %>% gt() %>%
+tab_header(   title = "Top 10 Largest Agency Review Teams"  ) %>% cols_label (agency="Agency", current_count="Current Count")
 
 
 
@@ -73,7 +75,8 @@ Show the top **smallest** agency review teams as of today - which we'll define h
 ```{r, echo=FALSE}
 
 agencycount_current %>%
-filter (current_count < 5)
+filter (current_count < 5) %>% gt() %>%
+tab_header(   title = "Agency Review Teams with Less than 5 Members"  ) %>% cols_label (agency="Agency", current_count="Current Count")
 
 
  
@@ -92,7 +95,10 @@ Below write code to show the new names added to the senior staff lists since the
   
 
 ```{r, echo=FALSE}
-newstaffnames
+newstaffnames %>% 
+  gt() %>%
+tab_header( title = "New Names Added to Senior Staff Lists") %>% 
+  cols_hide(columns = vars(link,idstring))
 
 
  
@@ -106,8 +112,22 @@ Add code to show the total number of people currently named to the WH senior sta
   
 
 ```{r, echo=FALSE}
-nrow (staffcount_current)
-nrow (staffcount_previous)
 
+transition_staff_current
 
+staffcount_current <- transition_staff_current %>%  
+  tally(n= "Number of People Currently Named to the WH Senior Staff")
+
+staffcount_current
+
+staffcount_previous <- transition_staff_previous %>%
+  tally(n = "Number of People Previously Named to WH Senior Staff")
+
+staffcount_previous
+
+staffcountcompare <- merge(staffcount_current, staffcount_previous, all=TRUE) staffcountcompare
+
+staffcountcompare %>%
+  gt() %>%
+  tab_header(title = "Total Number of People Currently Named to Senior Staff vs. Previous Count")
 ```
