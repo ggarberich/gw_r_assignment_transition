@@ -112,7 +112,6 @@ Add code to show the total number of people currently named to the WH senior sta
   
 
 ```{r, echo=FALSE}
-
 transition_staff_current
 
 staffcount_current <- transition_staff_current %>%  
@@ -125,7 +124,9 @@ staffcount_previous <- transition_staff_previous %>%
 
 staffcount_previous
 
-staffcountcompare <- merge(staffcount_current, staffcount_previous, all=TRUE) staffcountcompare
+staffcountcompare <- merge(staffcount_current, staffcount_previous, all=TRUE) 
+
+staffcountcompare
 
 staffcountcompare %>%
   gt() %>%
